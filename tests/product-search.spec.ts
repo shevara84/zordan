@@ -1,0 +1,13 @@
+import { test, expect } from '@fixtures/test-fixtures';
+import { searchTestData, SearchTestData } from '@test-data/search-data';
+
+
+
+test('search product', async({ searchPage })=> {
+    // go to home page
+    await searchPage.navigateTo();
+    //enter product and click on search button
+    await searchPage.fillFiedAndClickOnSearch(searchTestData[0].searchTerm)
+    // verify that search term and search keyword are matching
+    await expect(searchPage.searchKeyword).toHaveValue(searchTestData[0].searchTerm)
+})

@@ -1,0 +1,32 @@
+{
+  "name": "zoranportfolio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --check \"tests/**/*.ts\" \"playwright.config.ts\"",
+    "format:fix": "prettier --write \"tests/**/*.ts\" \"playwright.config.ts\"",
+    "validate": "npm run format && npm run lint && npm run test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.61.1",
+    "@types/dotenv": "^6.1.1",
+    "@types/node": "^24.13.3",
+    "dotenv": "^17.4.2",
+    "eslint": "^10.7.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-playwright": "^2.10.5",
+    "prettier": "^3.9.6",
+    "tsconfig-paths": "^4.2.0",
+    "typescript-eslint": "^8.65.0"
+  }
+}
