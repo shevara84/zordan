@@ -52,7 +52,7 @@ jobs:
         path: playwright-report/
 
   # OVAJ DEO KODA IZBACUJE PLAVI LINK NA GLAVNI EKRAN
-  deploy:
+  report:
     needs: test
     if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
