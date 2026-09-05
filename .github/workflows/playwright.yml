@@ -45,11 +45,12 @@ jobs:
       uses: actions/configure-pages@v4
       if: ${{ !cancelled() }}
 
+        # 2. Zip Playwright report folder
     - name: Zip Playwright report folder
       uses: actions/upload-pages-artifact@v3
       if: ${{ !cancelled() }}
       with:
-        path: playwright-report/
+        path: 'playwright-report'
 
   # OVAJ DEO KODA IZBACUJE PLAVI LINK NA GLAVNI EKRAN
   report:
