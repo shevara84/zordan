@@ -38,8 +38,8 @@ jobs:
     - name: Run all Playwright tests
       run: npx playwright test
       env:
-        DB_USERNAME: ${{ secrets.EMAIL }}
-        DB_PASSWORD: ${{ secrets.PASSWORD }}
+        EMAIL: ${{ secrets.EMAIL }}
+        PASSWORD: ${{ secrets.PASSWORD }}
 
     - name: Set up GitHub Pages environment
       uses: actions/configure-pages@v4
