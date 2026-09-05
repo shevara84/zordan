@@ -56,10 +56,13 @@ jobs:
     needs: test
     if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deploy-pages.outputs.page_url }} # Ispravljeno čitanje URL-a
     steps:
     - name: Deploy to GitHub Pages
-      id: deployment
+      id: deploy-pages # Jasno definisan ID koraka
       uses: actions/deploy-pages@v4
