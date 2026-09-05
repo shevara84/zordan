@@ -1,5 +1,5 @@
 import { test, expect } from '@fixtures/test-fixtures';
-import { searchTestData, SearchTestData } from '@test-data/search-data';
+import { searchTestData } from '@test-data/search-data';
 
 
 
