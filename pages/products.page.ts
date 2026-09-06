@@ -36,12 +36,13 @@ export class ProductsPage extends BasePage {
     async clickAddToCart() {
         await this.addToCartButton.click();
     }
+    //add product to cart
     async addSimpleComputerToCart(quantity: number) {
-    await this.navMenuOption('Computers');
-    await this.choseProduct('Desktops');
-    await this.chooseProductTitle('Simple Computer');
-    await this.radioButtonoptions('Slow').click();
-    await this.enterQuantity(quantity);
-    await this.clickAddToCart();
-}
+        await this.navMenuOption('Computers');
+        await this.choseProduct('Desktops');
+        await this.chooseProductTitle('Simple Computer');
+        await this.radioButtonoptions('Slow').click();
+        await this.enterQuantity(quantity);
+        await this.clickAddToCart();
+    }
 }
