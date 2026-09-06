@@ -1,21 +1,17 @@
 import { test, expect } from '@fixtures/test-fixtures';
 import { billingAddressData } from '../test-data/checkout-data';
 
-// using global session (user is logged in)
-test.use({ storageState: '.auth/user.json' });
 
 test.describe('cart operations', () => {
-  // Sprečavamo sudaranje testova na istom nalogu (izvršavaju se serijski)
+  // Using serial mode to avoid conflict on the same account
   test.describe.configure({ mode: 'serial' });
 
-  test('happy flow - add to cart and checkout', async ({page,productsPage,shoppingCartPage,checkoutPage,checkoutCompletedPage,cartSetup,}) => {
+  test('happy flow - add to cart and checkout', async ({ page, productsPage, shoppingCartPage, checkoutPage, checkoutCompletedPage, cartSetup, }) => {
     // clean cart before running test 
     await cartSetup.clearBeforeTest();
-
-    // Akcija: Dodajemo Simple Computer direktno preko jedne POM metode sa količinom 2
+    // add Simple Computer to Cart and quantity 2
     await productsPage.addSimpleComputerToCart(2);
     await expect(productsPage.successMessageBanner).toBeVisible();
-
     // go to cart and check details
     await productsPage.clickOnShoppingCartPageLink();
     await expect(page).toHaveURL('/cart');
@@ -27,7 +23,7 @@ test.describe('cart operations', () => {
     await shoppingCartPage.proceedToCheckout();
     await expect(page).toHaveURL('/onepagecheckout');
 
-    // Korak 1 na kasi: Popunjavanje adrese iz eksternih podataka
+    // fill the address
     await checkoutPage.fillBillingAddress(
       billingAddressData[0].country,
       billingAddressData[0].city,
@@ -49,16 +45,16 @@ test.describe('cart operations', () => {
     await expect(checkoutCompletedPage.successMessage).toContainText('successfully processed');
   });
 
-  // --- TEST 2: USPEŠNO BRISANJE PROIZVODA IZ KORPE ---
-  test('should successfully remove item from shopping cart', async ({productsPage,shoppingCartPage,cartSetup,}) => {
+
+  test('remove item from shopping cart', async ({ productsPage, shoppingCartPage, cartSetup, }) => {
     // Priprema stanja: Ovaj fixture u pozadini koristi istu POM metodu da ubaci 1 računar
     await cartSetup.populateBeforeTest();
 
-    // Odlazak u korpu
+    // Go to cart page
     await productsPage.clickOnShoppingCartPageLink();
     await expect(shoppingCartPage.productName).toContainText('Simple Computer');
 
-    // Akcija brisanja: Pozivamo metodu iz klase koja čekira "Remove" i klikće na "Update"
+    // Remove products from cart
     await shoppingCartPage.clearCartIfNotEmpty();
 
     // Verify that cart is empty

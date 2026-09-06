@@ -16,7 +16,7 @@ type MyFixtures = {
     cartSetup: { 
         clearBeforeTest: () => Promise<void> 
         populateBeforeTest: () => Promise<void>;
-    }; // Promenjen tip u objekat sa metodom
+    }; 
 }
 
 export const test = base.extend<MyFixtures>({
@@ -46,24 +46,23 @@ export const test = base.extend<MyFixtures>({
     },
     
     
-     // POSREDNIK ZA PRIPREMU STANJA KORPE PRE TESTOVA
     cartSetup: async ({ shoppingCartPage, productsPage }, use) => {
         const setupObject = {
-            // Metoda koja samo čisti korpu (za add-to-cart test)
+            // Method for cleaning cart(add to cart test)
             clearBeforeTest: async () => {
                 await shoppingCartPage.page.goto('/');
                 await shoppingCartPage.clearCartIfNotEmpty();
             },
-            // Metoda koja čisti korpu pa dodaje 1 proizvod (za remove-from-cart test)
+            // Method for cleaning cart and adding 1 product (remove from cart test)
             populateBeforeTest: async () => {
-                // 1. Očistimo korpu
+                //Clear cart if not empty
                 await shoppingCartPage.page.goto('/');
                 await shoppingCartPage.clearCartIfNotEmpty();
                 
-                // 2. Pozivamo čistu POM metodu za dodavanje 1 računara
+                // Add product to cart
                 await productsPage.addSimpleComputerToCart(1);
                 
-                // 3. Čekamo baner uspešnosti
+                //Verify that banner is visible
                 await expect(productsPage.successMessageBanner).toBeVisible({ timeout: 7000 });
             }
         };

@@ -1,5 +1,5 @@
 import { Page, Locator } from '@playwright/test';
-import { BasePage } from '@pages/base.page'; // Proveri da li ti je path alias tačno ovako napisan
+import { BasePage } from '@pages/base.page'; 
 
 export class ShoppingCartPage extends BasePage {
     readonly productName: Locator;

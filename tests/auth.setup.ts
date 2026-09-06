@@ -1,5 +1,5 @@
 import { test as setup, expect } from '@playwright/test';
-import { LoginPage } from '@pages/login.page'; // Prilagodi path alias ako treba
+import { LoginPage } from '@pages/login.page'; 
 
 const authFile = '.auth/user.json';
 
