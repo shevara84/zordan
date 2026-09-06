@@ -19,7 +19,7 @@ export class LoginPage extends BasePage {
         this.loginButton = page.getByRole('button', { name: 'Log in'});
         
     }
-
+    //click on login function
     async clickOnlogIn() {
         await this.loginLink.click();
     }
