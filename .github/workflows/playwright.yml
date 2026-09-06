@@ -61,7 +61,7 @@ jobs:
       pages: write
       id-token: write
     environment:
-      name: github-pages
+      name: report
       url: ${{ steps.deploy-pages.outputs.page_url }} # Ispravljeno čitanje URL-a
     steps:
     - name: Deploy to GitHub Pages
