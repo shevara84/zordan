@@ -61,9 +61,9 @@ jobs:
       pages: write
       id-token: write
     environment:
-      name: report
-      url: ${{ steps.deploy-pages.outputs.page_url }} # Ispravljeno čitanje URL-a
+      name: github-pages # Promenjeno u standardno ime okruženja
+      url: ${{ steps.deploy-pages.outputs.page_url }}
     steps:
     - name: Deploy to GitHub Pages
-      id: deploy-pages # Jasno definisan ID koraka
+      id: deploy-pages
       uses: actions/deploy-pages@v4

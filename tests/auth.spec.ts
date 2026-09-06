@@ -1,6 +1,8 @@
 import { test, expect } from '@fixtures/test-fixtures';
 import { invalidLoginData } from '@test-data/login-data';
 
+test.use({ storageState: undefined }); 
+
 test.describe('auth', () => {
   test('valid login', async ({ loginPage }) => {
     // navigate to Home Page

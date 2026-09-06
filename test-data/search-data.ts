@@ -5,7 +5,5 @@ export interface SearchTestData {
 
 // Export the data as an array of objects
 export const searchTestData: SearchTestData[]  = [
-  {
-    searchTerm: 'computer'
-  },
-];
+  { searchTerm: 'computer' },
+]

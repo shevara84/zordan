@@ -36,24 +36,36 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
-    // A. PRVI PROJEKAT: Dodat 'use' objekat da bi setup znao koji browser otvara!
+    // 1. SETUP PROJEKAT: Pokreće se samo kada ga zatraži 'cart-operations'
     {
       name: 'setup',
       testMatch: /auth\.setup\.ts/,
       use: {
-        ...devices['Desktop Chrome'], // KLJUČNO: Daje browser projektu da ne bi bio prazan
+        ...devices['Desktop Chrome'], 
       },
     },
 
-    // B. GLAVNI PROJEKAT: Pokreće sve tvoje redovne testove
+    // 2. PROJEKAT SA LOGINOM: Pokreće SAMO cart test i pre njega obavezno izvršava setup
     {
-      name: 'chromium',
+      name: 'cart-project',
+      testMatch: ['**/cart-operations.spec.ts'], 
       use: {
         ...devices['Desktop Chrome'],
+        storageState: '.auth/user.json', // Automatski dodeljuje sesiju za cart testove
       },
-      // Zavisi od uspešnog završetka setup-a
-      dependencies: ['setup'],
+      dependencies: ['setup'], // Veza sa setup-om postoji SAMO ovde
     },
+
+    // 3. PROJEKAT BEZ LOGINA: Pokreće auth i search testove ODMAH (preskače setup)
+    {
+      name: 'chromium',
+      testMatch: ['**/auth.spec.ts', '**/product-search.spec.ts'], 
+      use: {
+        ...devices['Desktop Chrome'],
+        // Nema storageState i nema dependencies!
+      },
+    },
+  
 
     // {
     //   name: 'firefox',

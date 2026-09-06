@@ -6,7 +6,7 @@ export interface BillingAddressData {
     zipCode: string,
     phoneNumber: string
 }
-
+// Export the data as an array of objects
 export const billingAddressData: BillingAddressData[] = [
     {
     country: 'Serbia',
