@@ -27,8 +27,8 @@ test.describe('auth', () => {
     // verify that url contains /login endpoint
     await expect(loginPage.page).toHaveURL('/login');
     // fill the form and click on login button
-    await loginPage.logIn(invalidLoginData.wrongEmail, invalidLoginData.wrongPassword);
+    await loginPage.logIn(invalidLoginData[0].wrongEmail, invalidLoginData[0].wrongPassword);
     //verify error message
-    await expect(loginPage.page.getByText(invalidLoginData.errorMessage)).toBeVisible();
+    await expect(loginPage.page.getByText(invalidLoginData[0].errorMessage)).toBeVisible();
   });
 });

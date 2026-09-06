@@ -29,11 +29,11 @@ test.describe('cart operations', () => {
 
     // Korak 1 na kasi: Popunjavanje adrese iz eksternih podataka
     await checkoutPage.fillBillingAddress(
-      billingAddressData.country,
-      billingAddressData.city,
-      billingAddressData.address1,
-      billingAddressData.zipCode,
-      billingAddressData.phoneNumber,
+      billingAddressData[0].country,
+      billingAddressData[0].city,
+      billingAddressData[0].address1,
+      billingAddressData[0].zipCode,
+      billingAddressData[0].phoneNumber,
     );
 
     // Preostali koraci kase (otvaraju se jedan po jedan na klik)
