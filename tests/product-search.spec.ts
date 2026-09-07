@@ -10,4 +10,6 @@ test('search product', async({ searchPage })=> {
     await searchPage.fillFiedAndClickOnSearch(searchTestData[0].searchTerm)
     // verify that search term and search keyword are matching
     await expect(searchPage.searchKeyword).toHaveValue(searchTestData[0].searchTerm)
+    // verify that log in link is visible
+    await expect(searchPage.loginLink).toBeVisible()
 })
