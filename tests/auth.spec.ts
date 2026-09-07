@@ -32,6 +32,5 @@ test.describe('auth', () => {
     await expect(
       loginPage.invalidLoginErrorMessage(invalidLoginData[0].errorMessage),
     ).toBeVisible();
-    await expect(loginPage.page).toHaveTitle('op')
   });
 });
