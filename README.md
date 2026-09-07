@@ -1,64 +1,125 @@
-# 🎭 Playwright Automation Project
+# Playwright Automation Project
 
-This repository contains End-to-End (E2E) automated tests built with the **Playwright** framework using **TypeScript**.
+E2E test automation project built with Playwright and TypeScript.
 
-## 🛠️ Architecture & Core Features
-- **Page Object Model (POM)** – Clean separation of page logic and test scripts.
-- **Custom Fixtures** – Optimized browser context and page initialization.
-- **Test Data & Dotenv** – Externalized test data and secure environment variables.
-- **TypeScript & TSConfig** – Strictly typed development for robust code.
-- **Code Quality** – Automated linting and formatting via ESLint and Prettier.
+## Project Structure
 
-## 📊 Core Test Scenarios
-1. **Authentication (`auth.spec.ts`)** – Validates successful login and error handling for invalid credentials (executed from a clean state).
-2. **Cart Operations (`cart-operations.spec.js`)** – Tests end-to-end shopping cart functionality using pre-saved authentication state (`storageState`).
-3. **Product Search (`product-search.spec.ts`)** – Verifies search capabilities and layout constraints for guest (unauthenticated) users.
+* **Page Object Model (POM)** – Page-specific logic is separated from test cases.
+* **Custom Fixtures** – Used for browser context and page setup.
+* **Test Data** – Test data is stored in the `test-data` folder and used for data-driven testing (DDT).
+* **Environment Variables** – Test credentials are loaded from `.env` using `dotenv`.
+* **TypeScript** – Used for type safety and project configuration.
+* **ESLint & Prettier** – Used for linting and code formatting.
 
----
+## Tests
 
-## 💻 Local Setup & Execution
+* `auth.spec.ts` – Login with valid credentials and validation of invalid login attempts.
+* `cart-operations.spec.js` – Shopping cart flows using saved authentication state (`storageState`).
+* `product-search.spec.ts` – Product search and layout checks for unauthenticated users.
 
-### Prerequisites
-- **Node.js** (LTS version recommended)
+## Test Execution
 
-### 1. Installation
-Clone the repository and install all required dependencies and browser binaries:
+Tests run in parallel by default.
+
+`cart-operations.spec.js` runs in **serial mode** because the tests use the same user and shared shopping cart state. Running these tests in parallel could result in flaky tests caused by concurrent changes to the same cart.
+
+## GitHub Actions
+
+Tests can also be triggered manually through GitHub Actions.
+
+After the workflow finishes, a link to the generated test run is available in the repository's **Deployments** section. This allows the test results to be accessed without downloading or setting up the project locally.
+
+[View Deployments](https://github.com/shevara84/zordan/deployments)
+
+## Local Setup
+
+### Requirements
+
+* Node.js (LTS recommended)
+* npm
+
+### Installation
+
+Clone the repository and install all project dependencies from `package.json`:
+
 ```bash
+git clone <repository-url>
+cd <project-directory>
 npm ci
+```
+
+Install Playwright browsers:
+
+```bash
 npx playwright install --with-deps
 ```
 
-### 2. Environment Configuration
-Create a `.env` file in the root directory of the project. Fill it with your own actual test credentials using the format below (this file is automatically ignored by Git):
+`npm ci` installs all dependencies defined in `package.json`, including `dotenv`.
+
+### Environment Variables
+
+Create a `.env` file in the project root.
+
+A `.env.example` file is included in the repository as a template:
+
+```bash
+cp .env.example .env
+```
+
+Update `.env` with your test credentials:
+
 ```env
 EMAIL=your_actual_email@example.com
 PASSWORD=your_secure_password_123
 ```
 
-### 3. Running Tests
+Example `.env.example`:
+
+```env
+EMAIL=your_actual_email@example.com
+PASSWORD=your_secure_password_123
+```
+
+Do not commit `.env` or any file containing real credentials.
+
+## Running Tests
+
+Run all tests:
+
 ```bash
-# Run all tests in headless mode
 npx playwright test
+```
 
-# Run all tests in UI Mode (interactive)
+Run tests in UI mode:
+
+```bash
 npx playwright test --ui
+```
 
-# Run a specific test file
+Run a specific test:
+
+```bash
 npx playwright test tests/product-search.spec.ts
 ```
 
-### 4. Code Quality Commands
-Keep the codebase clean and formatted using these built-in scripts:
-```bash
-# Run linter check
-npm run lint
+## Linting and Formatting
 
-# Format code automatically
+Run ESLint:
+
+```bash
+npm run lint
+```
+
+Format the code:
+
+```bash
 npm run format
 ```
 
-### 5. Viewing Test Reports
-After the test run completes, open the interactive HTML report using:
+## Test Report
+
+Open the Playwright HTML report after running the tests:
+
 ```bash
 npx playwright show-report
 ```

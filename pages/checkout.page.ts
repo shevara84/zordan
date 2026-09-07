@@ -8,7 +8,7 @@ export class CheckoutPage extends BasePage {
     readonly zipInput: Locator;
     readonly phoneInput: Locator;
     readonly billingContinueButton: Locator;
-    
+
     readonly shippingContinueButton: Locator;
     readonly shippingMethodContinueButton: Locator;
     readonly paymentMethodContinueButton: Locator;
@@ -17,15 +17,11 @@ export class CheckoutPage extends BasePage {
 
     constructor(page: Page) {
         super(page);
-        
-        // Lokatori za Billing adresu
         this.countrySelect = page.locator('#BillingNewAddress_CountryId');
         this.cityInput = page.locator('#BillingNewAddress_City');
         this.address1Input = page.locator('#BillingNewAddress_Address1');
         this.zipInput = page.locator('#BillingNewAddress_ZipPostalCode');
         this.phoneInput = page.locator('#BillingNewAddress_PhoneNumber');
-        
-        // Dugmići za nastavak koraka
         this.billingContinueButton = page.locator('#billing-buttons-container .new-address-next-step-button');
         this.shippingContinueButton = page.getByRole('listitem').filter({ hasText: 'Shipping address' }).getByRole('button', { name: 'Continue' });
         this.shippingMethodContinueButton = page.locator('.button-1.shipping-method-next-step-button');
@@ -34,19 +30,14 @@ export class CheckoutPage extends BasePage {
         this.confirmOrderButton = page.locator('.button-1.confirm-order-next-step-button');
     }
 
-    /**
-     * Pametno popunjavanje Billing adrese u zavisnosti od toga da li nalog već ima sačuvanu adresu
-     */
     async fillBillingAddress(country: string, city: string, address: string, zip: string, phone: string) {
-        // Proveravamo da li je forma vidljiva na ekranu
+        //check if form is visible 
         const isFormVisible = await this.countrySelect.isVisible();
-
         if (isFormVisible === false) {
-            // Ako forma NIJE vidljiva, znači da nalog već ima sačuvanu adresu.
-            // Samo klikćemo na Continue da otvorimo sledeći korak.
+            //click on the next step
             await this.billingContinueButton.click();
         } else {
-            // Ako je forma vidljiva, popunjavamo sva obavezna polja pre klika
+            //if visible fill form and click on button
             await this.countrySelect.selectOption({ label: country });
             await this.cityInput.fill(city);
             await this.address1Input.fill(address);
@@ -56,29 +47,29 @@ export class CheckoutPage extends BasePage {
         }
     }
 
-    // Korak 2: Potvrda adrese za slanje
+    //confirm shipping address
     async confirmShippingAddress() {
         await this.shippingContinueButton.click();
     }
 
-    // Korak 3: Izbor metode dostave
+    //select and click on shipping method
     async selectShippingMethod(methodName: string) {
         await this.page.getByLabel(methodName, { exact: false }).check();
         await this.shippingMethodContinueButton.click();
     }
 
-    // Korak 4: Izbor metode plaćanja
+    //select and click on payment method
     async selectPaymentMethod(methodName: string) {
         await this.page.getByLabel(methodName, { exact: false }).check();
         await this.paymentMethodContinueButton.click();
     }
 
-    // Korak 5: Potvrda informacija o plaćanju
+    //click on payment info
     async confirmPaymentInfo() {
         await this.paymentInfoContinueButton.click();
     }
 
-    // Korak 6: Finalni klik za potvrdu cele porudžbine
+    //click for confirming order
     async confirmOrder() {
         await this.confirmOrderButton.click();
     }

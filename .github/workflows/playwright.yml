@@ -50,7 +50,7 @@ jobs:
       with:
         path: 'playwright-report'
 
-  # OVAJ DEO KODA IZBACUJE PLAVI LINK NA GLAVNI EKRAN
+  
   report:
     needs: test
     if: ${{ !cancelled() }}
@@ -59,7 +59,7 @@ jobs:
       pages: write
       id-token: write
     environment:
-      name: github-pages # Promenjeno u standardno ime okruženja
+      name: github-pages
       url: ${{ steps.deploy-pages.outputs.page_url }}
     steps:
     - name: Deploy to GitHub Pages
