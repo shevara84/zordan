@@ -27,7 +27,7 @@ Tests run in parallel by default.
 
 Tests can also be triggered manually through GitHub Actions.
 
-After the workflow finishes, a link to the generated test run is available in the repository's **Deployments** section. This allows the test results to be accessed without downloading or setting up the project locally.
+After the workflow finishes, a link to the generated test report is available in the repository's **Deployments** section. This allows the test results to be accessed without downloading or setting up the project locally.
 
 [View Deployments](https://github.com/shevara84/zordan/deployments)
 
@@ -58,22 +58,13 @@ npx playwright install --with-deps
 
 ### Environment Variables
 
-Create a `.env` file in the project root.
-
-A `.env.example` file is included in the repository as a template:
+Create a `.env` file in the project root using `.env.example` as a template:
 
 ```bash
 cp .env.example .env
 ```
 
 Update `.env` with your test credentials:
-
-```env
-EMAIL=your_actual_email@example.com
-PASSWORD=your_secure_password_123
-```
-
-Example `.env.example`:
 
 ```env
 EMAIL=your_actual_email@example.com
