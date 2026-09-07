@@ -3,11 +3,13 @@ import { Page, Locator } from "@playwright/test";
 
 export class BasePage {
     readonly page: Page;
+    readonly loginLink: Locator;
     readonly logoutLink: Locator;
     readonly shoppingCartPageLink: Locator;
 
     constructor(page: Page) {
         this.page = page;
+        this.loginLink = page.getByRole('link', { name: 'Log in' });
         this.logoutLink = page.getByRole('link', { name: 'Log out' });
         this.shoppingCartPageLink = page.locator(`span:has-text("Shopping cart")`);
     }
