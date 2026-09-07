@@ -10,6 +10,11 @@ test('search product', async({ searchPage })=> {
     await searchPage.fillFiedAndClickOnSearch(searchTestData[0].searchTerm)
     // verify that search term and search keyword are matching
     await expect(searchPage.searchKeyword).toHaveValue(searchTestData[0].searchTerm)
+    // PROVERA NASLOVA: Bez helpera, bez petlji i bez lokalnih varijabli u testu!
+    //check if every element contains word computer
+    expect((await searchPage.getProductTitlesArray()).every(title => 
+        title.toLowerCase().includes(searchTestData[0].searchTerm.toLowerCase())
+    )).toBe(true);
     // verify that log in link is visible
     await expect(searchPage.loginLink).toBeVisible()
 })

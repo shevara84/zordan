@@ -7,7 +7,7 @@ test.describe('auth', () => {
         // navigate to Home Page
         await loginPage.navigateTo();
         // click on the login link
-        await loginPage.clickOnlogIn();
+        await loginPage.loginLink.click();
         // verify that url contains /login
         await expect(loginPage.page).toHaveURL('/login');
         // fill the form and click on log in button
@@ -24,7 +24,7 @@ test.describe('auth', () => {
         // navigate to Home Page
         await loginPage.navigateTo();
         // click on login
-        await loginPage.clickOnlogIn();
+        await loginPage.loginLink.click();
         // verify that url contains /login
         await expect(loginPage.page).toHaveURL('/login');
         // fill the form and click on login button
