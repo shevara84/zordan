@@ -22,9 +22,7 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 2 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [
-    ['html', { outputFolder: 'playwright-report', hostonehtml: true }]
-  ],
+  reporter: [['html', { outputFolder: 'playwright-report', hostonehtml: true }]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
@@ -41,14 +39,14 @@ export default defineConfig({
       name: 'setup',
       testMatch: /auth\.setup\.ts/,
       use: {
-        ...devices['Desktop Chrome'], 
+        ...devices['Desktop Chrome'],
       },
     },
 
     // 2. PROJEKAT SA LOGINOM: Pokreće SAMO cart test i pre njega obavezno izvršava setup
     {
       name: 'cart-project',
-      testMatch: ['**/cart-operations.spec.ts'], 
+      testMatch: ['**/cart-operations.spec.ts'],
       use: {
         ...devices['Desktop Chrome'],
         storageState: '.auth/user.json', // Automatski dodeljuje sesiju za cart testove
@@ -59,13 +57,12 @@ export default defineConfig({
     // 3. PROJEKAT BEZ LOGINA: Pokreće auth i search testove ODMAH (preskače setup)
     {
       name: 'chromium',
-      testMatch: ['**/auth.spec.ts', '**/product-search.spec.ts'], 
+      testMatch: ['**/auth.spec.ts', '**/product-search.spec.ts'],
       use: {
         ...devices['Desktop Chrome'],
         // Nema storageState i nema dependencies!
       },
     },
-  
 
     // {
     //   name: 'firefox',
