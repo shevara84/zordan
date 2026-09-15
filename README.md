@@ -29,6 +29,7 @@ Tests can also be triggered manually through GitHub Actions.
 
 After the workflow finishes, a link to the generated test report is available in the repository's **Deployments** section. This allows the test results to be accessed without downloading or setting up the project locally.
 
+[View Last Report] (https://shevara84.github.io/zordan/)
 [View Deployments](https://github.com/shevara84/zordan/deployments)
 
 ## Local Setup
